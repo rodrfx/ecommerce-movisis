@@ -1,21 +1,29 @@
+import { formatPrice } from '../../util/formatPrice';
 import { Container } from './styles';
 
-export interface Product {
+interface ProductCardProps {
+	addItemToCart: () => void;
 	title: string;
 	price: number;
 	image: string;
-	inclusionDate?: any;
 }
 
-export const ProductCard = ({ title, price, image }: Product) => {
-	const formattedPrice = price.toFixed(2).toString().replace('.', ',');
+export const ProductCard = ({
+	title,
+	price,
+	image,
+	addItemToCart,
+}: ProductCardProps) => {
+	const formattedPrice = formatPrice(price);
 
 	return (
 		<Container>
 			<img src={image} alt={title} />
 			<p>{title}</p>
 			<p>R$ {formattedPrice}</p>
-			<button type="button">Comprar</button>
+			<button type="button" onClick={addItemToCart}>
+				Comprar
+			</button>
 		</Container>
 	);
 };
