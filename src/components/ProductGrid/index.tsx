@@ -5,7 +5,7 @@ import { ProductCard } from '../ProductCard';
 import { Container, SearchBarStyle, Wrapper } from './styles';
 
 export interface Product {
-	id?: number;
+	id: number;
 	title: string;
 	price: number;
 	image: string;
@@ -25,8 +25,6 @@ export const ProductGrid = ({ products }: ProductsType) => {
 		setSearchInput(event.target.value);
 	};
 
-	console.log('PRICE', sortByPrice);
-
 	const conditionsToSearchTheProducts =
 		searchInput.length > 0 ||
 		filterMinPrice > 0 ||
@@ -36,23 +34,28 @@ export const ProductGrid = ({ products }: ProductsType) => {
 
 	const filteredProducts = conditionsToSearchTheProducts
 		? products
-				.filter((product) =>
-					product.title.toLowerCase().includes(searchInput.toLowerCase())
-				)
+				.filter((product) => {
+					const titleLowerCase = product.title.toLowerCase();
+					const searchInputLowerCase = searchInput.toLowerCase();
+					return titleLowerCase.includes(searchInputLowerCase);
+				})
 				.filter((product) => product.price > filterMinPrice)
 				.filter((product) => product.price < filterMaxPrice)
-				.filter((product) => product.price < filterMaxPrice)
+
 				.sort((a, b) =>
 					sortByPrice === 'increasingPrice'
 						? a.price - b.price
-						: b.price - a.price
-				)
-				.sort((a, b) =>
-					sortByDate === 'increasingDate'
+						: sortByPrice === 'DecreasingPrice'
+						? b.price - a.price
+						: sortByDate === 'increasingDate'
 						? a.inclusionDate.getTime() - b.inclusionDate.getTime()
-						: b.inclusionDate.getTime() - a.inclusionDate.getTime()
+						: sortByDate === 'DecreasingDate'
+						? b.inclusionDate.getTime() - a.inclusionDate.getTime()
+						: a.id - b.id
 				)
 		: [];
+
+	console.log(filteredProducts);
 
 	return (
 		<Container>
