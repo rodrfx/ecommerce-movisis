@@ -47,24 +47,28 @@ export const CartLinkStyle = styled(Link)`
 		}
 	}
 
-	span {
-		border: 1px solid ${({ theme }) => theme['green-500']};
-		background-color: ${({ theme }) => theme['green-500']};
-		color: ${({ theme }) => theme['gray-100']};
-		position: absolute;
-		top: 2px;
-		right: 0;
-		border-radius: 50%;
-		height: 22px;
-		width: 22px;
-		font-size: 1.4rem;
-		font-weight: 500;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-
 	svg {
 		color: ${({ theme }) => theme['gray-100']};
 	}
+`;
+
+interface CartSizeProps {
+	cartSize: number;
+}
+
+export const NumberOfProductsCart = styled.span<CartSizeProps>`
+	display: ${({ cartSize }) => (cartSize > 0 ? 'flex' : 'none')};
+	justify-content: center;
+	align-items: center;
+	border: 1px solid ${({ theme }) => theme['green-500']};
+	background-color: ${({ theme }) => theme['green-500']};
+	color: ${({ theme }) => theme['gray-100']};
+	position: absolute;
+	top: 2px;
+	right: 0;
+	border-radius: 50%;
+	height: 22px;
+	width: 22px;
+	font-size: 1.4rem;
+	font-weight: 500;
 `;

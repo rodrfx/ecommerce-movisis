@@ -1,7 +1,12 @@
 import { Alien, ShoppingCartSimple } from 'phosphor-react';
+import { useContext } from 'react';
+import { UserShoppingCart } from '../../context/UserShoppingCart';
 import * as S from './styles';
 
 export const Header = () => {
+	const { cart } = useContext(UserShoppingCart);
+	const cartSize = cart.length;
+
 	return (
 		<S.Container>
 			<S.Content>
@@ -12,7 +17,9 @@ export const Header = () => {
 				<S.CartLinkStyle to="/shoppingcart">
 					<button type="button">
 						<ShoppingCartSimple size={30} />
-						<span>3</span>
+						<S.NumberOfProductsCart cartSize={cartSize}>
+							{cartSize}
+						</S.NumberOfProductsCart>
 					</button>
 				</S.CartLinkStyle>
 			</S.Content>
