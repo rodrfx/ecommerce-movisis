@@ -1,6 +1,23 @@
+import { useContext } from 'react';
+import { UserShoppingCart } from '../../context/UserShoppingCart';
+import { formatPrice } from '../../util/formatPrice';
 import * as S from './styles';
 
 export const OrderSummary = () => {
+	const { cart } = useContext(UserShoppingCart);
+
+	const getTotalValue = () => {
+		let totalValue = 0;
+		for (let product of cart) {
+			totalValue += product.price * product.quantity;
+		}
+		return totalValue;
+	};
+
+	const productsPrice = getTotalValue();
+	const formattedProductsPrice = formatPrice(productsPrice);
+	const formattedPriceWithShipping = formatPrice(productsPrice + 10);
+
 	return (
 		<S.Container>
 			<header>
@@ -9,7 +26,7 @@ export const OrderSummary = () => {
 			<main>
 				<S.ProductDetail>
 					<p>Produtos</p>
-					<p>R$ 11,00</p>
+					<p>R$ {formattedProductsPrice}</p>
 				</S.ProductDetail>
 				<S.ProductDetail>
 					<p>Descontos</p>
@@ -21,7 +38,7 @@ export const OrderSummary = () => {
 				</S.ProductDetail>
 				<S.TotalSum>
 					<p>Total</p>
-					<p>R$ 210,00</p>
+					<p>R$ {formattedPriceWithShipping}</p>
 				</S.TotalSum>
 			</main>
 			<footer>
