@@ -8,8 +8,9 @@ export const Container = styled.li`
 	img {
 		max-width: 100%;
 		object-fit: cover;
-		width: 300px;
-		height: 300px;
+		width: 280px;
+		height: 280px;
+		align-self: center;
 	}
 
 	p {
@@ -34,7 +35,8 @@ export const Container = styled.li`
 		font-weight: 700;
 		border: 0;
 		border-radius: 2px;
-		height: 3.3rem;
+		height: 4rem;
+		min-height: 40px;
 		margin-top: 1rem;
 		color: ${({ theme }) => theme['gray-100']};
 		transition: opacity 0.2s;
@@ -44,7 +46,12 @@ export const Container = styled.li`
 		}
 	}
 
-	@media (max-width: 667px) {
+	@media (max-width: 627px) {
 		width: 100%;
+
+		img {
+			width: 100%;
+			height: 100%;
+		}
 	}
 `;
