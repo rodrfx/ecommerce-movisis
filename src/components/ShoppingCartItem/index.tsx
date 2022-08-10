@@ -1,22 +1,37 @@
 import { Minus, Plus } from 'phosphor-react';
+import { formatPrice } from '../../util/formatPrice';
 import * as S from './styles';
 
-export const ShoppingCartItem = () => {
+interface ShoppingCartItemProps {
+	title: string;
+	image: string;
+	price: number;
+	quantity: number;
+}
+
+export const ShoppingCartItem = ({
+	title,
+	image,
+	price,
+	quantity,
+}: ShoppingCartItemProps) => {
+	const formattedPrice = formatPrice(price);
+
 	return (
 		<S.Container>
 			<S.Content>
-				<img src="https://picsum.photos/80/80" alt="" />
+				<img src={image} alt={title} />
 				<S.ProductInfo>
-					<S.ProductName>Produto Camiseta et extraterrestre</S.ProductName>
+					<S.ProductName>{title}</S.ProductName>
 					<S.QuantityPrice>
-						<p>R$ 10,00</p>
+						<p>R$ {formattedPrice}</p>
 						<div>
 							<button>
-								<Plus size={15} weight="bold" />
-							</button>
-							<span>1</span>
-							<button>
 								<Minus size={15} weight="bold" />
+							</button>
+							<span>{quantity}</span>
+							<button>
+								<Plus size={15} weight="bold" />
 							</button>
 						</div>
 					</S.QuantityPrice>
