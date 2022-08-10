@@ -1,6 +1,7 @@
 import { MagnifyingGlass } from 'phosphor-react';
 import { ChangeEvent, useContext, useState } from 'react';
 import { UserFilters } from '../../context/UserFilters';
+import { UserShoppingCart } from '../../context/UserShoppingCart';
 import { ProductCard } from '../ProductCard';
 import { Container, SearchBarStyle, Wrapper } from './styles';
 
@@ -9,7 +10,7 @@ export interface Product {
 	title: string;
 	price: number;
 	image: string;
-	inclusionDate?: any;
+	inclusionDate: Date;
 }
 
 interface ProductsType {
@@ -20,6 +21,7 @@ export const ProductGrid = ({ products }: ProductsType) => {
 	const [searchInput, setSearchInput] = useState('');
 	const { filterMinPrice, filterMaxPrice, sortByPrice, sortByDate } =
 		useContext(UserFilters);
+	const { addItemToCart } = useContext(UserShoppingCart);
 
 	const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 		setSearchInput(event.target.value);
@@ -55,8 +57,6 @@ export const ProductGrid = ({ products }: ProductsType) => {
 				)
 		: [];
 
-	console.log(filteredProducts);
-
 	return (
 		<Container>
 			<SearchBarStyle>
@@ -77,6 +77,7 @@ export const ProductGrid = ({ products }: ProductsType) => {
 							title={product.title}
 							price={product.price}
 							image={product.image}
+							addItemToCart={() => addItemToCart(product)}
 						/>
 					))}
 				</Wrapper>
@@ -88,6 +89,7 @@ export const ProductGrid = ({ products }: ProductsType) => {
 							title={product.title}
 							price={product.price}
 							image={product.image}
+							addItemToCart={() => addItemToCart(product)}
 						/>
 					))}
 				</Wrapper>
