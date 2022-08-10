@@ -8,6 +8,11 @@ export const Container = styled.div`
 
 export const Content = styled.div`
 	display: flex;
+
+	img {
+		width: 8rem;
+		height: 8rem;
+	}
 `;
 
 export const ProductInfo = styled.div`
