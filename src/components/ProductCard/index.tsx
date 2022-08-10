@@ -1,5 +1,11 @@
-import { Product } from '../ProductGrid';
 import { Container } from './styles';
+
+export interface Product {
+	title: string;
+	price: number;
+	image: string;
+	inclusionDate?: any;
+}
 
 export const ProductCard = ({ title, price, image }: Product) => {
 	const formattedPrice = price.toFixed(2).toString().replace('.', ',');
