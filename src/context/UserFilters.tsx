@@ -70,6 +70,3 @@ export const UserFiltersContextProvider = ({
 		</UserFilters.Provider>
 	);
 };
-function newDate(): any {
-	throw new Error('Function not implemented.');
-}
